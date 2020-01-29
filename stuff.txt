@@ -1,0 +1,70 @@
+            /*
+            if (balance <= 0)
+            {
+                throw new Exception("Cannot pay interest on a negative or zero amount");
+            }
+            */
+
+
+            /*
+            if (amount <= 0)
+            {
+                throw new Exception("Cannot withdraw a negative or zero amount");
+            }
+            if (amount > MAX_AMOUNT)
+            {
+                throw new Exception("Cannot withdraw more than maximum amount per transaction: $" + MAX_AMOUNT);
+            }
+            if (amount > balance)
+            {
+                throw new Exception("Cannot withdraw more money than is available");
+            }
+            */
+
+
+            /*
+            if (amount <= 0)
+            {
+                throw new Exception("Cannot deposit a negative or zero amount");
+            }
+            if (amount > MAX_AMOUNT)
+            {
+                throw new Exception("Cannot deposit more than maximum amount per transaction: $" + MAX_AMOUNT);
+            }
+            */
+
+        [TestMethod]
+        public void TestWidthraw_ReturnsCorrectBalance()
+        {
+            // arrange  
+            double balance = 100.00;
+            string name = "Jamie";
+            int acctNum = 12345;
+            double debitAmount = 75;
+            double expected = 25;
+            BankAccount account = new BankAccount(12345, balance, "Jamie");
+
+            // act  
+            account.withdraw(debitAmount);
+
+            // assert  
+            double actual = account.getBalance();
+            Assert.AreEqual(expected, actual, "Account not debited correctly");
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception), "cannot have a negative balance")]
+        public void TestWithdraw_CausesCannotHaveNegativeBalanceException()
+        {
+            // arrange  
+            double balance = 100.00;
+            string name = "Jamie";
+            int acctNum = 12345;
+            double debitAmount = 1000.00;
+            BankAccount account = new BankAccount(12345, balance, "Jamie");
+
+            // act  
+            account.withdraw(debitAmount);
+        }
+
